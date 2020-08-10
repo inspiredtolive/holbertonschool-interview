@@ -17,13 +17,13 @@ avl_t *recursiveConvert(int *array, int begin, int end, avl_t *parent)
 		return (NULL);
 	mid = (begin + end) / 2;
 	node = malloc(sizeof(avl_t));
-	if (!new)
+	if (!node)
 		return (NULL);
 	node->n = array[mid];
 	node->parent = parent;
-	node->left = _sorted_array_to_avl(array, begin, mid - 1, new);
-	node->right = _sorted_array_to_avl(array, mid + 1, end, new);
-	return (new);
+	node->left = recursiveConvert(array, begin, mid - 1, node);
+	node->right = recursiveConvert(array, mid + 1, end, node);
+	return (node);
 }
 
 /**
